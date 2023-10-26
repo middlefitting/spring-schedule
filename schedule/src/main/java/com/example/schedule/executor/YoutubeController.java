@@ -28,6 +28,29 @@ public class YoutubeController {
     this.taskExecutorExample = taskExecutorExample;
   }
 
+  /**
+   * 비디오 업로드 요청, 병목 요청의 예시
+   *
+   * @param videoName
+   * @return
+   */
+  @PostMapping("/video/upload")
+  public ResponseEntity<String> videoRequest(@RequestParam String videoName) {
+    try {
+      Thread.sleep(1000 * 10);
+      System.out.println(videoName + "영상의 Youtube 화질 처리를 완료하였습니다!");
+    } catch (InterruptedException e) {
+      return ResponseEntity.status(500).body("내부 서버 오류가 발생하였습니다! \uD83D\uDE4F");
+    }
+    return ResponseEntity.ok("요청이 완료되었습니다!");
+  }
+
+  /**
+   * 비디오 업로드 요청, 비동기 Task 활용
+   *
+   * @param videoName
+   * @return
+   */
   @PostMapping("/video")
   public ResponseEntity<String> video(@RequestParam String videoName) {
     try {
