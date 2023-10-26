@@ -29,6 +29,9 @@ public class TaskExecutorExample {
       this.videoName = videoName;
     }
 
+    /**
+     * 비디오 업로드 처리 메소드. 비동기적인 면을 보여주고자 스레드를 재워 5초 후에 처리 완료 메시지를 출력한다.
+     */
     public void run() {
       try {
         Thread.sleep(1000 * 5);
@@ -45,6 +48,11 @@ public class TaskExecutorExample {
     this.taskExecutor = taskExecutor;
   }
 
+  /**
+   * 비디오 업로드 비동기 테스크 처리
+   * @param videoName
+   * @throws InterruptedException
+   */
   public void uploadVideo(String videoName) throws InterruptedException {
     taskExecutor.execute(new UploadVideoTask(videoName));
   }
